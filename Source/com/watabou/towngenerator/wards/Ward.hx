@@ -92,8 +92,7 @@ class Ward {
 		// For every vertex: if this belongs only
 		// to patches within city, then 1, otherwise 0
 		var density = [for (v in patch.shape)
-			if (model.gates.contains( v )) 1 else
-				model.patchByVertex( v ).every( function( p:Patch ) return p.withinCity ) ? 2 * Random.float() : 0
+			(model.gates.contains( v ) ? 1.0 : (model.patchByVertex( v ).every( function( p:Patch ) return p.withinCity ) ? 2.0 * Random.float() : 0.0))
 		];
 
 		geometry = geometry.filter( function( building:Polygon ) {
